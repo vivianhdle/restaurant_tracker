@@ -13,12 +13,23 @@ class RestaurantTracker{
             partyOf:options.inputFields.partyOf,
         }
         //=====BINDING=============================================
-        this.addRestaurant = this.addRestaurant.bind(this);
+        this.getData = this.getData.bind(this);
+        this.gotData = this.gotData.bind(this);
     }
     addEventListeners(){
-        this.buttons.addButton.addEventListener('click',this.addRestaurant)
+        this.buttons.dataButton.addEventListener("click",this.getData);
     }
-    addRestaurant(){
+    getData(){
+        var ajaxOptions={
+            dataType:'json',
+            url:'static/restaurantlist.json',
+            method:'get',
+            success:this.gotData
+        }
+        $.ajax(ajaxOptions);
         console.log('hello');
+    }
+    gotData(response){
+        console.log(response);
     }
 }
