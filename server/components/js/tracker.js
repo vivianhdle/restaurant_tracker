@@ -30,6 +30,21 @@ class RestaurantTracker{
         console.log('hello');
     }
     gotData(response){
-        console.log(response);
+        debugger;
+        if (response.success){
+            response.data.forEach((item)=>{
+                const restaurant = new Restaurant({
+                    info:{
+                        name:item.restaurant,
+                        cuisine:item.cuisine,
+                        inOrOut:item.inOrOut,
+                        expense:item.expense,
+                        partyOf:item.partyOf,
+                    }
+                })
+                const domElement = restaurant.render();
+                document.getElementById('display-area').appendChild(domElement);
+            })
+        }
     }
 }
