@@ -2,6 +2,7 @@ class Restaurant{
     constructor(options){
         this.domElement = null;
         this.info = {
+            id:options.info.id,
             name:options.info.name,
             cuisine:options.info.cuisine,
             inOrOut:options.info.inOrOut,
@@ -9,11 +10,10 @@ class Restaurant{
             partyOf:options.info.partyOf
         }
         this.callbacks = {
-
+            
         }
     }
     render(){
-        debugger;
         this.domElement = document.createElement("TR");
         const name = document.createElement("TD");
         name.innerText = this.info.name;
@@ -35,6 +35,20 @@ class Restaurant{
         this.domElement.appendChild(inOrOut);
         this.domElement.appendChild(expense);
         this.domElement.appendChild(partyOf);
+        this.domElement.appendChild(this.createDeleteButton());
         return this.domElement;
+    }
+    createDeleteButton(){
+        const container = document.createElement("TD");
+        const button = document.createElement("BUTTON");
+        container.setAttribute('class','col-xs-2 col-md-2');
+        const deleteIcon =document.createElement("I");
+        deleteIcon.setAttribute('class','fas fa-trash');
+        button.appendChild(deleteIcon);
+        container.appendChild(button);
+        return container;
+    }
+    deleteSelf(){
+        this.domElement.remove();
     }
 }
