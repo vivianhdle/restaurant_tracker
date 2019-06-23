@@ -17,7 +17,7 @@ function startApp(){
             partyOf:document.getElementById('party-of'),
         },
         displayAreas:{
-            expense:document.getElementById('display-area')
+            restaurants:document.getElementById('display-area')
         }
     })
     restaurantTracker.addEventListeners();

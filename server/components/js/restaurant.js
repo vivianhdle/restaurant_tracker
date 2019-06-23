@@ -10,8 +10,10 @@ class Restaurant{
             partyOf:options.info.partyOf
         }
         this.callbacks = {
-            
+            delete:options.callbacks.delete
         }
+        //=====BINDING=============================================
+        this.deleteSelf = this.deleteSelf.bind(this);
     }
     render(){
         this.domElement = document.createElement("TR");
@@ -46,9 +48,11 @@ class Restaurant{
         deleteIcon.setAttribute('class','fas fa-trash');
         button.appendChild(deleteIcon);
         container.appendChild(button);
+        button.addEventListener("click",this.deleteSelf);
         return container;
     }
     deleteSelf(){
         this.domElement.remove();
+        this.callbacks.delete(this.info.id);
     }
 }
