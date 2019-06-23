@@ -1,0 +1,32 @@
+{
+	"success": true,
+	"data": [{
+		"id": 1,
+		"restaurant": "In-N-Out",
+		"cuisine": "American",
+        "inOrOut": "Fast Food",
+        "expense":"$",
+        "partyOf":"unlimited"
+	}, {
+		"id": 2,
+		"restaurant": "In-N-Out",
+		"cuisine": "American",
+        "inOrOut": "Fast Food",
+        "expense":"$",
+        "partyOf":"unlimited"
+	}, {
+		"id": 3,
+		"restaurant": "In-N-Out",
+		"cuisine": "American",
+        "inOrOut": "Fast Food",
+        "expense":"$",
+        "partyOf":"unlimited"
+	}, {
+		"id": 4,
+		"restaurant": "In-N-Out",
+		"cuisine": "American",
+        "inOrOut": "Fast Food",
+        "expense":"$",
+        "partyOf":"unlimited"
+	}]
+}
