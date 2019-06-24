@@ -1,0 +1,24 @@
+{
+  "name": "restaurant_tracker",
+  "version": "1.0.0",
+  "description": "Vanilla JavaSript and Node project",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vivianhdle/restaurant_tracker.git"
+  },
+  "author": "Vivian Le",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vivianhdle/restaurant_tracker/issues"
+  },
+  "homepage": "https://github.com/vivianhdle/restaurant_tracker#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mysql": "^2.17.1"
+  }
+}

@@ -27,7 +27,7 @@ class RestaurantTracker{
     getData(){
         var ajaxOptions={
             dataType:'json',
-            url:'static/restaurantlist.json',
+            url:'/api/restaurants',
             method:'get',
             success:this.gotData
         }
