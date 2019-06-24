@@ -7,7 +7,8 @@ function startApp(){
         buttons:{
             addButton:document.getElementById('add-button'),
             cancelButton:document.getElementById('cancel-button'),
-            dataButton:document.getElementById('data-button')
+            dataButton:document.getElementById('data-button'),
+            saveButton:document.getElementById('save-button')
         },
         inputFields:{
             restaurantName:document.getElementById('restaurant-name'),

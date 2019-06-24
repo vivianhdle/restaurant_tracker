@@ -10,11 +10,19 @@ class Restaurant{
             partyOf:options.info.partyOf
         }
         this.callbacks = {
-            delete:options.callbacks.delete
+            delete:options.callbacks.delete,
+            update:options.callbacks.update
+        }
+        this.updateFields = {
+            updateName:options.updateFields.updateName,
+            updateCuisine:options.updateFields.updateCuisine,
+            updateInOrOut:options.updateFields.updateInOrOut,
+            updateExpense:options.updateFields.updateExpense,
+            updatePartyOf:options.updateFields.updatePartyOf
         }
         //=====BINDING=============================================
         this.deleteSelf = this.deleteSelf.bind(this);
-        this.updateSelf = this.updateSelf.bind(this);
+        this.setDefaultValues = this.setDefaultValues.bind(this);
     }
     render(){
         this.domElement = document.createElement("TR");
@@ -64,14 +72,15 @@ class Restaurant{
         dataAttr.value = "#myModal"
         button.setAttributeNode(dataAttr);
         button.appendChild(updateIcon);
-        button.addEventListener("click",this.updateSelf);
+        button.addEventListener("click",this.setDefaultValues);
         return button;
     }
-    updateSelf(){
-        console.log('updating');
-    }
-    updateModal(){
-
+    setDefaultValues(){
+        this.updateFields.updateName.value = this.info.name;
+        this.updateFields.updateCuisine.value = this.info.cuisine;
+        this.updateFields.updateInOrOut.value = this.info.inOrOut;
+        this.updateFields.updateExpense.value = this.info.expense;
+        this.updateFields.updatePartyOf.value = this.info.partyOf;
     }
     deleteSelf(){
         if (this.callbacks.delete(this.info.id)){

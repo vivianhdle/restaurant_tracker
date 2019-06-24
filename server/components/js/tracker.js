@@ -3,7 +3,8 @@ class RestaurantTracker{
         this.buttons = {
             addButton:options.buttons.addButton,
             cancelButton:options.buttons.cancelButton,
-            dataButton:options.buttons.dataButton
+            dataButton:options.buttons.dataButton,
+            saveButton:options.buttons.saveButton
         }
         this.inputFields = {
             restaurantName:options.inputFields.restaurantName,
@@ -11,6 +12,11 @@ class RestaurantTracker{
             inOrOut:options.inputFields.inOrOut,
             expense:options.inputFields.expense,
             partyOf:options.inputFields.partyOf,
+            updateName:options.inputFields.updateName,
+            updateCuisine:options.inputFields.updateCuisine,
+            updateInOrOut:options.inputFields.updateInOrOut,
+            updateExpense:options.inputFields.updateExpense,
+            updatePartyOf:options.inputFields.updatePartyOf
         }
         this.displayAreas = {
             restaurants:options.displayAreas.restaurants
@@ -20,10 +26,12 @@ class RestaurantTracker{
         this.getData = this.getData.bind(this);
         this.deleteRestaurant = this.deleteRestaurant.bind(this);
         this.addRestaurant = this.addRestaurant.bind(this);
+        this.updateRestaurant = this.updateRestaurant.bind(this);
     }
     addEventListeners(){
         this.buttons.dataButton.addEventListener("click",this.getData);
         this.buttons.addButton.addEventListener("click",this.addRestaurant);
+        this.buttons.saveButton.addEventListener("click",this.updateRestaurant);
     }
     getData(){
         this.clearDisplayArea();
@@ -42,7 +50,15 @@ class RestaurantTracker{
                             id:item.id
                         },
                         callbacks:{
-                            delete:this.deleteRestaurant
+                            delete:this.deleteRestaurant,
+                            update:this.updateRestaurant
+                        },
+                        updateFields:{
+                            updateName:this.inputFields.updateName,
+                            updateCuisine:this.inputFields.updateCuisine,
+                            updateInOrOut:this.inputFields.updateInOrOut,
+                            updateExpense:this.inputFields.updateExpense,
+                            updatePartyOf:this.inputFields.updatePartyOf
                         }
                     })
                     this.restaurants.push(restaurant);
@@ -94,6 +110,21 @@ class RestaurantTracker{
                 return false;
             }
         })
+    }
+    updateRestaurant(){
+        const params = {
+            name: this.inputFields.updateName.value,
+            cuisine:this.inputFields.updateCuisine.value,
+            inOrOut:this.inputFields.updateInOrOut.value,
+            expense:this.inputFields.updateExpense.value,
+            partyOf:this.inputFields.updatePartyOf.value
+        }
+        const {name,cuisine,inOrOut,expense,partyOf} = params;
+        if (!name || !cuisine || !inOrOut || !expense || !partyOf){
+            console.log('didnt add')
+            return false;
+        }
+        
     }
     clearDisplayArea(){
         while (this.displayAreas.restaurants.firstChild){
