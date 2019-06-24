@@ -29,7 +29,31 @@ server.get('/api/restaurants',(req,res)=>{
         })
     })
 })
-
+//=======DELETE=====================================================
+server.delete('/api/restaurants/:restaurant_id',(req,res)=>{
+    if(req.params.restaurant_id === undefined){
+        res.send({
+            success:false,
+            error:'must provide restaurant ID to delete'
+        })
+        return;
+    }
+    db.connect(()=>{
+        const query = 'DELETE FROM `restaurant` WHERE `id` = ' + req.params.restaurant_id;
+        db.query(query,(error,data)=>{
+            const output={
+                success:false
+            }
+            if (!error){
+                output.success=true;
+                output.data = data;
+            } else {
+                output.error = error;
+            }
+            res.send(output);
+        })
+    })
+})
 
 
 
