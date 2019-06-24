@@ -10,10 +10,19 @@ class Restaurant{
             partyOf:options.info.partyOf
         }
         this.callbacks = {
-            delete:options.callbacks.delete
+            delete:options.callbacks.delete,
+            update:options.callbacks.update
+        }
+        this.updateFields = {
+            updateName:options.updateFields.updateName,
+            updateCuisine:options.updateFields.updateCuisine,
+            updateInOrOut:options.updateFields.updateInOrOut,
+            updateExpense:options.updateFields.updateExpense,
+            updatePartyOf:options.updateFields.updatePartyOf
         }
         //=====BINDING=============================================
         this.deleteSelf = this.deleteSelf.bind(this);
+        this.setDefaultValues = this.setDefaultValues.bind(this);
     }
     render(){
         this.domElement = document.createElement("TR");
@@ -48,8 +57,30 @@ class Restaurant{
         deleteIcon.setAttribute('class','fas fa-trash');
         button.appendChild(deleteIcon);
         container.appendChild(button);
+        container.appendChild(this.createUpdateButton());
         button.addEventListener("click",this.deleteSelf);
         return container;
+    }
+    createUpdateButton(){
+        const button = document.createElement("BUTTON");
+        const updateIcon =document.createElement("I");
+        updateIcon.setAttribute('class','fas fa-edit');
+        const toggleAttr = document.createAttribute("data-toggle");
+        toggleAttr.value = "modal"
+        button.setAttributeNode(toggleAttr);
+        const dataAttr = document.createAttribute('data-target');
+        dataAttr.value = "#myModal"
+        button.setAttributeNode(dataAttr);
+        button.appendChild(updateIcon);
+        button.addEventListener("click",this.setDefaultValues);
+        return button;
+    }
+    setDefaultValues(){
+        this.updateFields.updateName.value = this.info.name;
+        this.updateFields.updateCuisine.value = this.info.cuisine;
+        this.updateFields.updateInOrOut.value = this.info.inOrOut;
+        this.updateFields.updateExpense.value = this.info.expense;
+        this.updateFields.updatePartyOf.value = this.info.partyOf;
     }
     deleteSelf(){
         if (this.callbacks.delete(this.info.id)){

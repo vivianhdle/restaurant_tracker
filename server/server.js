@@ -30,7 +30,6 @@ server.get('/api/restaurants',(req,res)=>{
     })
 })
 //=======INSERT=====================================================
-
 server.post('/api/restaurants',(req,res)=>{
     const {name,cuisine,inOrOut,expense,partyOf}=req.body
     db.connect(()=>{
