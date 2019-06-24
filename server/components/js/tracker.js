@@ -15,48 +15,59 @@ class RestaurantTracker{
         this.displayAreas = {
             restaurants:options.displayAreas.restaurants
         }
-        this.data={}
+        this.restaurants=[];
         //=====BINDING=============================================
         this.getData = this.getData.bind(this);
-        this.gotData = this.gotData.bind(this);
         this.deleteRestaurant = this.deleteRestaurant.bind(this);
     }
     addEventListeners(){
         this.buttons.dataButton.addEventListener("click",this.getData);
     }
     getData(){
-        var ajaxOptions={
-            dataType:'json',
-            url:'/api/restaurants',
-            method:'get',
-            success:this.gotData
-        }
-        $.ajax(ajaxOptions);
-    }
-    gotData(response){
-        if (response.success){
-            this.data = response.data;
-            response.data.forEach((item)=>{
-                const restaurant = new Restaurant({
-                    info:{
-                        name:item.restaurant,
-                        cuisine:item.cuisine,
-                        inOrOut:item.inOrOut,
-                        expense:item.expense,
-                        partyOf:item.partyOf,
-                        id:item.id
-                    },
-                    callbacks:{
-                        delete:this.deleteRestaurant
-                    }
+        this.clearDisplayArea();
+        fetch('api/restaurants')
+        .then(resp=>resp.json())
+        .then(data => {
+            if (data.success){
+                data.data.forEach((item)=>{
+                    const restaurant = new Restaurant({
+                        info:{
+                            name:item.restaurant,
+                            cuisine:item.cuisine,
+                            inOrOut:item.inOrOut,
+                            expense:item.expense,
+                            partyOf:item.partyOf,
+                            id:item.id
+                        },
+                        callbacks:{
+                            delete:this.deleteRestaurant
+                        }
+                    })
+                    this.restaurants.push(restaurant);
+                    const domElement = restaurant.render();
+                    this.displayAreas.restaurants.appendChild(domElement);
                 })
-                const domElement = restaurant.render();
-                this.displayAreas.restaurants.appendChild(domElement);
-            })
-        }
+            }
+        })
     }
     deleteRestaurant(id){
-        console.log(this.data);
-        //DELETE API CALL HERE
+        debugger;
+        fetch(`api/restaurants/${id}`, {method: 'DELETE'})
+        .then(resp=>resp.json())
+        .then(data => {
+            if (data.success){
+                this.getData();
+                return true;
+            }else {
+                console.log('did not delete');
+                return false;
+            }
+        })
+    }
+    clearDisplayArea(){
+        while (this.displayAreas.restaurants.firstChild){
+            this.displayAreas.restaurants.removeChild(this.displayAreas.restaurants.firstChild);
+        }
+        this.restaurants=[];
     }
 }

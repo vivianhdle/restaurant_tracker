@@ -52,7 +52,8 @@ class Restaurant{
         return container;
     }
     deleteSelf(){
-        this.domElement.remove();
-        this.callbacks.delete(this.info.id);
+        if (this.callbacks.delete(this.info.id)){
+            this.domElement.remove();
+        }
     }
 }
