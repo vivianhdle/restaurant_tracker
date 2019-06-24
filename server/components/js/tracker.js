@@ -22,11 +22,13 @@ class RestaurantTracker{
             restaurants:options.displayAreas.restaurants
         }
         this.restaurants=[];
+        this.updatingID = null;
         //=====BINDING=============================================
         this.getData = this.getData.bind(this);
         this.deleteRestaurant = this.deleteRestaurant.bind(this);
         this.addRestaurant = this.addRestaurant.bind(this);
         this.updateRestaurant = this.updateRestaurant.bind(this);
+        this.updating = this.updating.bind(this);
     }
     addEventListeners(){
         this.buttons.dataButton.addEventListener("click",this.getData);
@@ -51,7 +53,7 @@ class RestaurantTracker{
                         },
                         callbacks:{
                             delete:this.deleteRestaurant,
-                            update:this.updateRestaurant
+                            updating:this.updating
                         },
                         updateFields:{
                             updateName:this.inputFields.updateName,
@@ -59,6 +61,9 @@ class RestaurantTracker{
                             updateInOrOut:this.inputFields.updateInOrOut,
                             updateExpense:this.inputFields.updateExpense,
                             updatePartyOf:this.inputFields.updatePartyOf
+                        },
+                        buttons:{
+                            saveButton:this.buttons.saveButton
                         }
                     })
                     this.restaurants.push(restaurant);
@@ -113,6 +118,7 @@ class RestaurantTracker{
     }
     updateRestaurant(){
         const params = {
+            id:this.updatingID,
             name: this.inputFields.updateName.value,
             cuisine:this.inputFields.updateCuisine.value,
             inOrOut:this.inputFields.updateInOrOut.value,
@@ -124,7 +130,24 @@ class RestaurantTracker{
             console.log('didnt add')
             return false;
         }
-        
+        fetch('api/update-restaurant',{
+            method:'POST',
+            body:JSON.stringify(params),
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        }).then(resp => resp.json())
+        .then(data=>{
+            if (data.success){
+                this.getData();
+                return true;
+            } else {
+                return false;
+            }
+        })
+    }
+    updating(id){
+        this.updatingID = id;
     }
     clearDisplayArea(){
         while (this.displayAreas.restaurants.firstChild){
