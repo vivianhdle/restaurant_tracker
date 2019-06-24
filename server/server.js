@@ -29,6 +29,14 @@ server.get('/api/restaurants',(req,res)=>{
         })
     })
 })
+//=======INSERT=====================================================
+server.post('/api/restaurants',(req,res)=>{
+    console.log(req);
+    // const query = 'INSERT INTO `restaurant` SET `id`=?, `name`=?, `cuisine`=?, `inOrOut`=?, `expense`=?, `partyOf`=?'
+    // db.query(query,[],(error,data)=>{
+
+    // })
+})
 //=======DELETE=====================================================
 server.delete('/api/restaurants/:restaurant_id',(req,res)=>{
     if(req.params.restaurant_id === undefined){
