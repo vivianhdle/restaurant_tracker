@@ -15,6 +15,12 @@ function startApp(){
             inOrOut:document.getElementById('in-or-out'),
             expense:document.getElementById('expense'),
             partyOf:document.getElementById('party-of'),
+            updateName:document.getElementById('update-name'),
+            updateCuisine:document.getElementById('update-cuisine'),
+            updateInOrOut:document.getElementById('update-in-or-out'),
+            updateExpense:document.getElementById('update-expense'),
+            updatePartyOf:document.getElementById('update-party-of'),
+
         },
         displayAreas:{
             restaurants:document.getElementById('display-area')

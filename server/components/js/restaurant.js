@@ -14,6 +14,7 @@ class Restaurant{
         }
         //=====BINDING=============================================
         this.deleteSelf = this.deleteSelf.bind(this);
+        this.updateSelf = this.updateSelf.bind(this);
     }
     render(){
         this.domElement = document.createElement("TR");
@@ -48,8 +49,29 @@ class Restaurant{
         deleteIcon.setAttribute('class','fas fa-trash');
         button.appendChild(deleteIcon);
         container.appendChild(button);
+        container.appendChild(this.createUpdateButton());
         button.addEventListener("click",this.deleteSelf);
         return container;
+    }
+    createUpdateButton(){
+        const button = document.createElement("BUTTON");
+        const updateIcon =document.createElement("I");
+        updateIcon.setAttribute('class','fas fa-edit');
+        const toggleAttr = document.createAttribute("data-toggle");
+        toggleAttr.value = "modal"
+        button.setAttributeNode(toggleAttr);
+        const dataAttr = document.createAttribute('data-target');
+        dataAttr.value = "#myModal"
+        button.setAttributeNode(dataAttr);
+        button.appendChild(updateIcon);
+        button.addEventListener("click",this.updateSelf);
+        return button;
+    }
+    updateSelf(){
+        console.log('updating');
+    }
+    updateModal(){
+
     }
     deleteSelf(){
         if (this.callbacks.delete(this.info.id)){

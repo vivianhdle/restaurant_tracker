@@ -26,7 +26,6 @@ class RestaurantTracker{
         this.buttons.addButton.addEventListener("click",this.addRestaurant);
     }
     getData(){
-        debugger;
         this.clearDisplayArea();
         fetch('api/restaurants')
         .then(resp=>resp.json())
