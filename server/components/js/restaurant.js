@@ -11,7 +11,7 @@ class Restaurant{
         }
         this.callbacks = {
             delete:options.callbacks.delete,
-            update:options.callbacks.update
+            updating:options.callbacks.updating
         }
         this.updateFields = {
             updateName:options.updateFields.updateName,
@@ -19,6 +19,9 @@ class Restaurant{
             updateInOrOut:options.updateFields.updateInOrOut,
             updateExpense:options.updateFields.updateExpense,
             updatePartyOf:options.updateFields.updatePartyOf
+        }
+        this.buttons = {
+            saveButton:options.buttons.saveButton
         }
         //=====BINDING=============================================
         this.deleteSelf = this.deleteSelf.bind(this);
@@ -81,6 +84,7 @@ class Restaurant{
         this.updateFields.updateInOrOut.value = this.info.inOrOut;
         this.updateFields.updateExpense.value = this.info.expense;
         this.updateFields.updatePartyOf.value = this.info.partyOf;
+        this.callbacks.updating(this.info.id);
     }
     deleteSelf(){
         if (this.callbacks.delete(this.info.id)){

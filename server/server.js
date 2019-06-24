@@ -72,7 +72,24 @@ server.delete('/api/restaurants/:restaurant_id',(req,res)=>{
         })
     })
 })
-
+//=======UPDATE=====================================================
+server.post('/api/update-restaurant',(req,res)=>{
+    const {name,cuisine,inOrOut,expense,partyOf,id}=req.body
+    db.connect(()=>{
+        const query = 'UPDATE `restaurant` SET `restaurant`="'+name+'", `cuisine`="'+cuisine+'", `inOrOut` = "'+inOrOut+'", `expense`="'+expense+'", `partyOf` = "'+partyOf+'" WHERE `restaurant`.`id`=' + id
+        db.query(query,(error,data)=>{
+            const output = {
+                success:false,
+                error
+            }
+            if (!error){
+                res.send({success:true})
+            }else{
+                res.send({output})
+            }
+        })
+    })
+});
 
 
 server.listen(3001,()=>{
