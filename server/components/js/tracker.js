@@ -19,11 +19,14 @@ class RestaurantTracker{
         //=====BINDING=============================================
         this.getData = this.getData.bind(this);
         this.deleteRestaurant = this.deleteRestaurant.bind(this);
+        this.addRestaurant = this.addRestaurant.bind(this);
     }
     addEventListeners(){
         this.buttons.dataButton.addEventListener("click",this.getData);
+        this.buttons.addButton.addEventListener("click",this.addRestaurant);
     }
     getData(){
+        debugger;
         this.clearDisplayArea();
         fetch('api/restaurants')
         .then(resp=>resp.json())
@@ -60,6 +63,35 @@ class RestaurantTracker{
                 return true;
             }else {
                 console.log('did not delete');
+                return false;
+            }
+        })
+    }
+    addRestaurant(){
+        const params = {
+            name: this.inputFields.restaurantName.value,
+            cuisine:this.inputFields.cuisine.value,
+            inOrOut:this.inputFields.inOrOut.value,
+            expense:this.inputFields.expense.value,
+            partyOf:this.inputFields.partyOf.value,
+        }
+        const {name,cuisine,inOrOut,expense,partyOf} = params;
+        if (!name || !cuisine || !inOrOut || !expense || !partyOf){
+            console.log('didnt add')
+            return false;
+        }
+        fetch('api/restaurants',{
+            method:'POST',
+            body:JSON.stringify(params),
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        }).then(resp => resp.json())
+        .then(data=>{
+            if (data.success){
+                this.getData();
+                return true;
+            } else {
                 return false;
             }
         })
