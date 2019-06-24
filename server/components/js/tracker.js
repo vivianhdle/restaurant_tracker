@@ -27,7 +27,7 @@ class RestaurantTracker{
     getData(){
         var ajaxOptions={
             dataType:'json',
-            url:'static/restaurantlist.json',
+            url:'/api/restaurants',
             method:'get',
             success:this.gotData
         }
@@ -57,5 +57,6 @@ class RestaurantTracker{
     }
     deleteRestaurant(id){
         console.log(this.data);
+        //DELETE API CALL HERE
     }
 }
