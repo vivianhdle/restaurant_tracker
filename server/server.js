@@ -30,12 +30,23 @@ server.get('/api/restaurants',(req,res)=>{
     })
 })
 //=======INSERT=====================================================
-server.post('/api/restaurants',(req,res)=>{
-    console.log(req);
-    // const query = 'INSERT INTO `restaurant` SET `id`=?, `name`=?, `cuisine`=?, `inOrOut`=?, `expense`=?, `partyOf`=?'
-    // db.query(query,[],(error,data)=>{
 
-    // })
+server.post('/api/restaurants',(req,res)=>{
+    const {name,cuisine,inOrOut,expense,partyOf}=req.body
+    db.connect(()=>{
+        const query = 'INSERT INTO `restaurant` SET `restaurant`="'+name+'", `cuisine`="'+cuisine+'", `inOrOut` = "'+inOrOut+'", `expense`="'+expense+'", `partyOf` = "'+partyOf+'"'
+        db.query(query,(error,data)=>{
+            const output={
+                success:false,
+                error
+            }
+            if (!error){
+                res.send({success:true})
+            } else {
+                res.send({output});
+            }
+        })
+    })
 })
 //=======DELETE=====================================================
 server.delete('/api/restaurants/:restaurant_id',(req,res)=>{
@@ -67,6 +78,4 @@ server.delete('/api/restaurants/:restaurant_id',(req,res)=>{
 
 server.listen(3001,()=>{
     console.log('carrier has arrived');
-}) 
-
-// INSERT INTO `restaurant` (`id`, `name`, `cuisine`, `inOrOut`, `expense`, `partyOf`) VALUES (NULL, 'In-N-Out', 'American', 'Fast Food', '$', 'unlimited'), (NULL, 'Coco Ichibanya', 'Japanese', 'Either', '$', 'max 8');
+})
