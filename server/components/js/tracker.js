@@ -3,7 +3,6 @@ class RestaurantTracker{
         this.buttons = {
             addButton:options.buttons.addButton,
             cancelButton:options.buttons.cancelButton,
-            dataButton:options.buttons.dataButton,
             saveButton:options.buttons.saveButton
         }
         this.inputFields = {
@@ -19,7 +18,8 @@ class RestaurantTracker{
             updatePartyOf:options.inputFields.updatePartyOf
         }
         this.displayAreas = {
-            restaurants:options.displayAreas.restaurants
+            restaurants:options.displayAreas.restaurants,
+            total:options.displayAreas.total
         }
         this.restaurants=[];
         this.updatingID = null;
@@ -31,7 +31,6 @@ class RestaurantTracker{
         this.updating = this.updating.bind(this);
     }
     addEventListeners(){
-        this.buttons.dataButton.addEventListener("click",this.getData);
         this.buttons.addButton.addEventListener("click",this.addRestaurant);
         this.buttons.saveButton.addEventListener("click",this.updateRestaurant);
     }
@@ -72,9 +71,11 @@ class RestaurantTracker{
                 })
             }
         })
+        .then(()=>{
+            this.setTotalValue();
+        })
     }
     deleteRestaurant(id){
-        debugger;
         fetch(`api/restaurants/${id}`, {method: 'DELETE'})
         .then(resp=>resp.json())
         .then(data => {
@@ -148,6 +149,9 @@ class RestaurantTracker{
     }
     updating(id){
         this.updatingID = id;
+    }
+    setTotalValue(){
+        this.displayAreas.total.innerText = this.restaurants.length;
     }
     clearDisplayArea(){
         while (this.displayAreas.restaurants.firstChild){

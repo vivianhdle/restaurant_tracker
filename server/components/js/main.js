@@ -24,8 +24,10 @@ function startApp(){
 
         },
         displayAreas:{
-            restaurants:document.getElementById('display-area')
+            restaurants:document.getElementById('display-area'),
+            total:document.getElementById('total')
         }
     })
     restaurantTracker.addEventListeners();
+    restaurantTracker.getData();
 }
