@@ -93,5 +93,5 @@ server.post('/api/update-destination',(req,res)=>{
 
 
 server.listen(3001,()=>{
-    console.log('carrier has arrived');
+    console.log('listening on port 3001');
 })

@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded",startApp);
 let destinationTracker;
 
 function startApp(){
-    destinationTracker = new destinationTracker({
+    destinationTracker = new DestinationTracker({
         buttons:{
             addButton:document.getElementById('add-button'),
             cancelButton:document.getElementById('cancel-button'),
@@ -18,8 +18,8 @@ function startApp(){
             updateName:document.getElementById('update-name'),
             updateCountry:document.getElementById('update-country'),
             updateKnownFor:document.getElementById('update-known-for'),
-            updateMustEat:document.getElementById('update-eat'),
-            updateMustDo:document.getElementById('update-do'),
+            updateMustEat:document.getElementById('update-must-eat'),
+            updateMustDo:document.getElementById('update-must-do'),
 
         },
         displayAreas:{

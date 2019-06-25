@@ -35,6 +35,7 @@ class DestinationTracker{
         this.buttons.saveButton.addEventListener("click",this.updateDestination);
     }
     getData(){
+        debugger;
         this.clearDisplayArea();
         fetch('api/destinations')
         .then(resp=>resp.json())
@@ -65,7 +66,7 @@ class DestinationTracker{
                             saveButton:this.buttons.saveButton
                         }
                     })
-                    this.destinations.push(destionation);
+                    this.destinations.push(destination);
                     const domElement = destination.render();
                     this.displayAreas.destinations.appendChild(domElement);
                 })
@@ -117,7 +118,7 @@ class DestinationTracker{
             }
         })
     }
-    updateDestinationt(){
+    updateDestination(){
         const params = {
             id:this.updatingID,
             name: this.inputFields.updateName.value,

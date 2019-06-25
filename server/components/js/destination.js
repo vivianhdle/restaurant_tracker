@@ -55,30 +55,33 @@ class Destination{
     createDeleteButton(){
         const container = document.createElement("TD");
         const button = document.createElement("BUTTON");
+        button.setAttribute('class','btn btn-sm btn-default operation');
         container.setAttribute('class','col-xs-2 col-md-2');
         const deleteIcon =document.createElement("I");
         deleteIcon.setAttribute('class','fas fa-trash');
         button.appendChild(deleteIcon);
-        container.appendChild(button);
         container.appendChild(this.createUpdateButton());
+        container.appendChild(button);
         button.addEventListener("click",this.deleteSelf);
         return container;
     }
     createUpdateButton(){
         const button = document.createElement("BUTTON");
+        button.setAttribute('class','btn btn-sm btn-default operation');
         const updateIcon =document.createElement("I");
         updateIcon.setAttribute('class','fas fa-edit');
         const toggleAttr = document.createAttribute("data-toggle");
         toggleAttr.value = "modal"
         button.setAttributeNode(toggleAttr);
         const dataAttr = document.createAttribute('data-target');
-        dataAttr.value = "#myModal"
+        dataAttr.value = "#modal"
         button.setAttributeNode(dataAttr);
         button.appendChild(updateIcon);
         button.addEventListener("click",this.setDefaultValues);
         return button;
     }
     setDefaultValues(){
+        debugger;
         this.updateFields.updateName.value = this.info.name;
         this.updateFields.updateCountry.value = this.info.country;
         this.updateFields.updateKnownFor.value = this.info.knownFor;
