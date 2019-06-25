@@ -12,9 +12,9 @@ server.use(express.urlencoded({extended:false}));
 server.use(express.json())
 
 //=======READ=====================================================
-server.get('/api/restaurants',(req,res)=>{
+server.get('/api/destinations',(req,res)=>{
     db.connect(()=>{
-        const query = `SELECT * from restaurant`
+        const query = `SELECT * from destination`
         db.query(query,(error,data)=>{
             const output={
                 success:false
@@ -30,10 +30,10 @@ server.get('/api/restaurants',(req,res)=>{
     })
 })
 //=======INSERT=====================================================
-server.post('/api/restaurants',(req,res)=>{
-    const {name,cuisine,inOrOut,expense,partyOf}=req.body
+server.post('/api/destinations',(req,res)=>{
+    const {name,country,knownFor,mustEat,mustDo}=req.body
     db.connect(()=>{
-        const query = 'INSERT INTO `restaurant` SET `restaurant`="'+name+'", `cuisine`="'+cuisine+'", `inOrOut` = "'+inOrOut+'", `expense`="'+expense+'", `partyOf` = "'+partyOf+'"'
+        const query = 'INSERT INTO `destination` SET `destination`="'+name+'", `country`="'+country+'", `knownFor` = "'+knownFor+'", `mustEat`="'+mustEat+'", `mustDo` = "'+mustDo+'"'
         db.query(query,(error,data)=>{
             const output={
                 success:false,
@@ -48,16 +48,16 @@ server.post('/api/restaurants',(req,res)=>{
     })
 })
 //=======DELETE=====================================================
-server.delete('/api/restaurants/:restaurant_id',(req,res)=>{
-    if(req.params.restaurant_id === undefined){
+server.delete('/api/destinations/:destination_id',(req,res)=>{
+    if(req.params.destination_id === undefined){
         res.send({
             success:false,
-            error:'must provide restaurant ID to delete'
+            error:'must provide destination ID to delete'
         })
         return;
     }
     db.connect(()=>{
-        const query = 'DELETE FROM `restaurant` WHERE `id` = ' + req.params.restaurant_id;
+        const query = 'DELETE FROM `destination` WHERE `id` = ' + req.params.destination_id;
         db.query(query,(error,data)=>{
             const output={
                 success:false
@@ -73,10 +73,10 @@ server.delete('/api/restaurants/:restaurant_id',(req,res)=>{
     })
 })
 //=======UPDATE=====================================================
-server.post('/api/update-restaurant',(req,res)=>{
-    const {name,cuisine,inOrOut,expense,partyOf,id}=req.body
+server.post('/api/update-destination',(req,res)=>{
+    const {name,country,knownFor,mustEat,mustDo,id}=req.body
     db.connect(()=>{
-        const query = 'UPDATE `restaurant` SET `restaurant`="'+name+'", `cuisine`="'+cuisine+'", `inOrOut` = "'+inOrOut+'", `expense`="'+expense+'", `partyOf` = "'+partyOf+'" WHERE `restaurant`.`id`=' + id
+        const query = 'UPDATE `destination` SET `destination`="'+name+'", `country`="'+country+'", `knownFor` = "'+knownFor+'", `mustEat`="'+mustEat+'", `mustDo` = "'+mustDo+'" WHERE `destination`.`id`=' + id
         db.query(query,(error,data)=>{
             const output = {
                 success:false,
@@ -93,5 +93,5 @@ server.post('/api/update-restaurant',(req,res)=>{
 
 
 server.listen(3001,()=>{
-    console.log('carrier has arrived');
+    console.log('listening on port 3001');
 })
