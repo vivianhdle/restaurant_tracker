@@ -1,13 +1,13 @@
-class Restaurant{
+class Destination{
     constructor(options){
         this.domElement = null;
         this.info = {
             id:options.info.id,
             name:options.info.name,
-            cuisine:options.info.cuisine,
-            inOrOut:options.info.inOrOut,
-            expense:options.info.expense,
-            partyOf:options.info.partyOf
+            country:options.info.country,
+            knownFor:options.info.knownFor,
+            mustEat:options.info.mustEat,
+            mustDo:options.info.mustDo
         }
         this.callbacks = {
             delete:options.callbacks.delete,
@@ -15,10 +15,10 @@ class Restaurant{
         }
         this.updateFields = {
             updateName:options.updateFields.updateName,
-            updateCuisine:options.updateFields.updateCuisine,
-            updateInOrOut:options.updateFields.updateInOrOut,
-            updateExpense:options.updateFields.updateExpense,
-            updatePartyOf:options.updateFields.updatePartyOf
+            updateCountry:options.updateFields.updateCountry,
+            updateKnownFor:options.updateFields.updateKnownFor,
+            updateMustEat:options.updateFields.updateMustEat,
+            updateMustDo:options.updateFields.updateMustDo
         }
         this.buttons = {
             saveButton:options.buttons.saveButton
@@ -32,23 +32,23 @@ class Restaurant{
         const name = document.createElement("TD");
         name.innerText = this.info.name;
         name.setAttribute('class','col-xs-2 col-md-2');
-        const cuisine = document.createElement("TD");
-        cuisine.innerText = this.info.cuisine;
-        cuisine.setAttribute('class','col-xs-2 col-md-2');
-        const inOrOut = document.createElement("TD");
-        inOrOut.innerText = this.info.inOrOut;
-        inOrOut.setAttribute('class','col-xs-2 col-md-2');
-        const expense = document.createElement("TD");
-        expense.innerText = this.info.expense;
-        expense.setAttribute('class','col-xs-2 col-md-2');
-        const partyOf = document.createElement("TD");
-        partyOf.innerText = this.info.partyOf;
-        partyOf.setAttribute('class','col-xs-2 col-md-2');
+        const country = document.createElement("TD");
+        country.innerText = this.info.country;
+        country.setAttribute('class','col-xs-2 col-md-2');
+        const knownFor = document.createElement("TD");
+        knownFor.innerText = this.info.knownFor;
+        knownFor.setAttribute('class','col-xs-2 col-md-2');
+        const mustEat = document.createElement("TD");
+        mustEat.innerText = this.info.mustEat;
+        mustEat.setAttribute('class','col-xs-2 col-md-2');
+        const mustDo = document.createElement("TD");
+        mustDo.innerText = this.info.mustDo;
+        mustDo.setAttribute('class','col-xs-2 col-md-2');
         this.domElement.appendChild(name);
-        this.domElement.appendChild(cuisine);
-        this.domElement.appendChild(inOrOut);
-        this.domElement.appendChild(expense);
-        this.domElement.appendChild(partyOf);
+        this.domElement.appendChild(country);
+        this.domElement.appendChild(knownFor);
+        this.domElement.appendChild(mustEat);
+        this.domElement.appendChild(mustDo);
         this.domElement.appendChild(this.createDeleteButton());
         return this.domElement;
     }
@@ -80,10 +80,10 @@ class Restaurant{
     }
     setDefaultValues(){
         this.updateFields.updateName.value = this.info.name;
-        this.updateFields.updateCuisine.value = this.info.cuisine;
-        this.updateFields.updateInOrOut.value = this.info.inOrOut;
-        this.updateFields.updateExpense.value = this.info.expense;
-        this.updateFields.updatePartyOf.value = this.info.partyOf;
+        this.updateFields.updateCountry.value = this.info.country;
+        this.updateFields.updateKnownFor.value = this.info.knownFor;
+        this.updateFields.updateMustEat.value = this.info.mustEat;
+        this.updateFields.updateMustDo.value = this.info.mustDo;
         this.callbacks.updating(this.info.id);
     }
     deleteSelf(){

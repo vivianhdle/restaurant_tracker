@@ -13,45 +13,45 @@
 <div class="col-xs-12 col-lg-12">
     <div class="page-header media-heading col-xs-12 col-lg-12">
         <!-- only show this element when the isnt on mobile -->
-        <h1 class="hidden-xs col-lg-12">Restaurant Tracker
-            <small class="col-lg-offset-6">Total Restaurants: <span id="total">0</span></small>
+        <h1 class="hidden-xs col-lg-12">Travel Wishlist
+            <small class="col-lg-offset-6">Total Wishes: <span id="total">0</span></small>
         </h1>
         <!-- only show this element when the user gets to a mobile version -->
-        <h3 class="hidden-md hidden-lg hidden-xl">Restaurant Tracker
-            <small class="col-xs-offset-9">Total Restaurants: <span class="avgGrade"></span></small>
+        <h3 class="hidden-md hidden-lg hidden-xl">Travel Wishlist
+            <small class="col-xs-offset-9">Total Wishes: <span class="avgGrade"></span></small>
         </h3>
     </div>
     <div class="student-add-form col-xs-12 col-lg-3 pull-right">
-        <h4>Add Restaurant</h4>
+        <h4>Add Destination</h4>
         <div class="form-group input-group col-xs-12 col-lg-12">
             <span class="input-group-addon">
                 <span><i class="fas fa-utensils"></i></span>
             </span>
-            <input type="text" class="form-control form-rounded" name="restaurant-name" id="restaurant-name" placeholder="Restaurant Name">
+            <input type="text" class="form-control form-rounded" name="destination-name" id="destination-name" placeholder="Destination">
         </div>
         <div class="form-group input-group col-xs-12 col-lg-12">
             <span class="input-group-addon">
                 <span><i class="fas fa-question"></i></span>
             </span>
-            <input type="text" class="form-control form-rounded" name="cuisine" id="cuisine" placeholder="Cuisine">
+            <input type="text" class="form-control form-rounded" name="country" id="country" placeholder="Country">
         </div>
         <div class="form-group input-group col-xs-12 col-lg-12">
             <span class="input-group-addon">
                 <span><i class="fas fa-glass-cheers"></i></span>
             </span>
-            <input type="text" class="form-control form-rounded" name="in-or-out" id="in-or-out" placeholder="Fast Food/ Dine In">
+            <input type="text" class="form-control form-rounded" name="known-for" id="known-for" placeholder="Known For">
         </div>
         <div class="form-group input-group col-xs-12 col-lg-12">
             <span class="input-group-addon">
                 <span><i class="fas fa-dollar-sign"></i></span>
             </span>
-            <input type="text" class="form-control form-rounded" name="expense" id="expense" placeholder="Rate your expense">
+            <input type="text" class="form-control form-rounded" name="must-eat" id="must-eat" placeholder="Must Eats">
         </div>
         <div class="form-group input-group col-xs-12 col-lg-12">
             <span class="input-group-addon">
                 <span><i class="fas fa-users"></i></span>
             </span>
-            <input type="text" class="form-control form-rounded" name="party-of" id="party-of" placeholder="Good for part of">
+            <input type="text" class="form-control form-rounded" name="must-do" id="must-do" placeholder="Must Dos">
         </div>
         <button type="button" class="add btn btn-success" id="add-button">Add</button>
         <button type="button" class="cancel btn btn-default" id="cancel-button">Cancel</button>
@@ -60,11 +60,11 @@
         <table class="student-list col-lg-12">
             <thead>
             <tr>
-                <th class="col-xs-2 col-md-2">Restaurant Name</th>
-                <th class="col-xs-2 col-md-2">Cuisine</th>
-                <th class="col-xs-2 col-md-2">Fast Food? Dine In?</th>
-                <th class="col-xs-2 col-md-2">Rate your expense</th>
-                <th class="col-xs-2 col-md-2">Good for party of</th>
+                <th class="col-xs-2 col-md-2">Destination</th>
+                <th class="col-xs-2 col-md-2">Country</th>
+                <th class="col-xs-2 col-md-2">Known For</th>
+                <th class="col-xs-2 col-md-2">Must Eats</th>
+                <th class="col-xs-2 col-md-2">Must Dos</th>
                 <th class="col-xs-2 col-md-2">Operations</th>
             </tr>
             </thead>
@@ -87,31 +87,31 @@
                         <span class="input-group-addon">
                             <span><i class="fas fa-utensils"></i></span>
                         </span>
-                        <input type="text" class="form-control form-rounded" name="restaurant-name" id="update-name" placeholder="Restaurant Name">
+                        <input type="text" class="form-control form-rounded" name="destination-name" id="update-name" placeholder="Destination">
                     </div>
                     <div class="form-group input-group col-xs-12 col-lg-12">
                         <span class="input-group-addon">
                             <span><i class="fas fa-question"></i></span>
                         </span>
-                        <input type="text" class="form-control form-rounded" name="cuisine" id="update-cuisine" placeholder="Cuisine">
+                        <input type="text" class="form-control form-rounded" name="country" id="update-country" placeholder="Country">
                     </div>
                     <div class="form-group input-group col-xs-12 col-lg-12">
                         <span class="input-group-addon">
                             <span><i class="fas fa-glass-cheers"></i></span>
                         </span>
-                        <input type="text" class="form-control form-rounded" name="in-or-out" id="update-in-or-out" placeholder="Fast Food/ Dine In">
+                        <input type="text" class="form-control form-rounded" name="known-for" id="update-known-for" placeholder="Known For">
                     </div>
                     <div class="form-group input-group col-xs-12 col-lg-12">
                         <span class="input-group-addon">
                             <span><i class="fas fa-dollar-sign"></i></span>
                         </span>
-                        <input type="text" class="form-control form-rounded" name="expense" id="update-expense" placeholder="Rate your expense">
+                        <input type="text" class="form-control form-rounded" name="must-eat" id="update-must-eat" placeholder="Must Eats">
                     </div>
                     <div class="form-group input-group col-xs-12 col-lg-12">
                         <span class="input-group-addon">
                             <span><i class="fas fa-users"></i></span>
                         </span>
-                        <input type="text" class="form-control form-rounded" name="party-of" id="update-party-of" placeholder="Good for part of">
+                        <input type="text" class="form-control form-rounded" name="must-do" id="update-must-do" placeholder="Must Dos">
                     </div>
                 </div>
                 <div class="modal-footer">

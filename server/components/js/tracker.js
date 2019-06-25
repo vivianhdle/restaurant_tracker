@@ -1,4 +1,4 @@
-class RestaurantTracker{
+class DestinationTracker{
     constructor(options){
         this.buttons = {
             addButton:options.buttons.addButton,
@@ -6,68 +6,68 @@ class RestaurantTracker{
             saveButton:options.buttons.saveButton
         }
         this.inputFields = {
-            restaurantName:options.inputFields.restaurantName,
-            cuisine:options.inputFields.cuisine,
-            inOrOut:options.inputFields.inOrOut,
-            expense:options.inputFields.expense,
-            partyOf:options.inputFields.partyOf,
+            destinationName:options.inputFields.destinationName,
+            country:options.inputFields.country,
+            knownFor:options.inputFields.knownFor,
+            mustEat:options.inputFields.mustEat,
+            mustDo:options.inputFields.mustDo,
             updateName:options.inputFields.updateName,
-            updateCuisine:options.inputFields.updateCuisine,
-            updateInOrOut:options.inputFields.updateInOrOut,
-            updateExpense:options.inputFields.updateExpense,
-            updatePartyOf:options.inputFields.updatePartyOf
+            updateCountry:options.inputFields.updateCountry,
+            updateKnownFor:options.inputFields.updateKnownFor,
+            updateMustEat:options.inputFields.updateMustEat,
+            updateMustDo:options.inputFields.updateMustDo
         }
         this.displayAreas = {
-            restaurants:options.displayAreas.restaurants,
+            destinations:options.displayAreas.destinations,
             total:options.displayAreas.total
         }
-        this.restaurants=[];
+        this.destinations=[];
         this.updatingID = null;
         //=====BINDING=============================================
         this.getData = this.getData.bind(this);
-        this.deleteRestaurant = this.deleteRestaurant.bind(this);
-        this.addRestaurant = this.addRestaurant.bind(this);
-        this.updateRestaurant = this.updateRestaurant.bind(this);
+        this.deleteDestination = this.deleteDestination.bind(this);
+        this.addDestination = this.addDestination.bind(this);
+        this.updateDestination = this.updateDestination.bind(this);
         this.updating = this.updating.bind(this);
     }
     addEventListeners(){
-        this.buttons.addButton.addEventListener("click",this.addRestaurant);
-        this.buttons.saveButton.addEventListener("click",this.updateRestaurant);
+        this.buttons.addButton.addEventListener("click",this.addDestination);
+        this.buttons.saveButton.addEventListener("click",this.updateDestination);
     }
     getData(){
         this.clearDisplayArea();
-        fetch('api/restaurants')
+        fetch('api/destinations')
         .then(resp=>resp.json())
         .then(data => {
             if (data.success){
                 data.data.forEach((item)=>{
-                    const restaurant = new Restaurant({
+                    const destination = new Destination({
                         info:{
-                            name:item.restaurant,
-                            cuisine:item.cuisine,
-                            inOrOut:item.inOrOut,
-                            expense:item.expense,
-                            partyOf:item.partyOf,
+                            name:item.destination,
+                            country:item.country,
+                            knownFor:item.knownFor,
+                            mustEat:item.mustEat,
+                            mustDo:item.mustDo,
                             id:item.id
                         },
                         callbacks:{
-                            delete:this.deleteRestaurant,
+                            delete:this.deleteDestination,
                             updating:this.updating
                         },
                         updateFields:{
                             updateName:this.inputFields.updateName,
-                            updateCuisine:this.inputFields.updateCuisine,
-                            updateInOrOut:this.inputFields.updateInOrOut,
-                            updateExpense:this.inputFields.updateExpense,
-                            updatePartyOf:this.inputFields.updatePartyOf
+                            updateCountry:this.inputFields.updateCountry,
+                            updateKnownFor:this.inputFields.updateKnownFor,
+                            updateMustEat:this.inputFields.updateMustEat,
+                            updateMustDo:this.inputFields.updateMustDo
                         },
                         buttons:{
                             saveButton:this.buttons.saveButton
                         }
                     })
-                    this.restaurants.push(restaurant);
-                    const domElement = restaurant.render();
-                    this.displayAreas.restaurants.appendChild(domElement);
+                    this.destinations.push(destionation);
+                    const domElement = destination.render();
+                    this.displayAreas.destinations.appendChild(domElement);
                 })
             }
         })
@@ -75,8 +75,8 @@ class RestaurantTracker{
             this.setTotalValue();
         })
     }
-    deleteRestaurant(id){
-        fetch(`api/restaurants/${id}`, {method: 'DELETE'})
+    deleteDestination(id){
+        fetch(`api/destinations/${id}`, {method: 'DELETE'})
         .then(resp=>resp.json())
         .then(data => {
             if (data.success){
@@ -88,20 +88,20 @@ class RestaurantTracker{
             }
         })
     }
-    addRestaurant(){
+    addDestination(){
         const params = {
-            name: this.inputFields.restaurantName.value,
-            cuisine:this.inputFields.cuisine.value,
-            inOrOut:this.inputFields.inOrOut.value,
-            expense:this.inputFields.expense.value,
-            partyOf:this.inputFields.partyOf.value,
+            name: this.inputFields.destinationName.value,
+            country:this.inputFields.country.value,
+            knownFor:this.inputFields.knownFor.value,
+            mustEat:this.inputFields.mustEat.value,
+            mustDo:this.inputFields.mustDo.value,
         }
-        const {name,cuisine,inOrOut,expense,partyOf} = params;
-        if (!name || !cuisine || !inOrOut || !expense || !partyOf){
+        const {name,country,knownFor,mustEat,mustDo} = params;
+        if (!name || !country || !knownFor || !mustEat || !mustDo){
             console.log('didnt add')
             return false;
         }
-        fetch('api/restaurants',{
+        fetch('api/destinations',{
             method:'POST',
             body:JSON.stringify(params),
             headers:{
@@ -117,21 +117,21 @@ class RestaurantTracker{
             }
         })
     }
-    updateRestaurant(){
+    updateDestinationt(){
         const params = {
             id:this.updatingID,
             name: this.inputFields.updateName.value,
-            cuisine:this.inputFields.updateCuisine.value,
-            inOrOut:this.inputFields.updateInOrOut.value,
-            expense:this.inputFields.updateExpense.value,
-            partyOf:this.inputFields.updatePartyOf.value
+            country:this.inputFields.updateCountry.value,
+            knownFor:this.inputFields.updateKnownFor.value,
+            mustEat:this.inputFields.updateMustEat.value,
+            mustDo:this.inputFields.updateMustDo.value,
         }
-        const {name,cuisine,inOrOut,expense,partyOf} = params;
-        if (!name || !cuisine || !inOrOut || !expense || !partyOf){
+        const {name,country,knownFor,mustEat,mustDo} = params;
+        if (!name || !country || !knownFor || !mustEat || !mustDo){
             console.log('didnt add')
             return false;
         }
-        fetch('api/update-restaurant',{
+        fetch('api/update-destination',{
             method:'POST',
             body:JSON.stringify(params),
             headers:{
@@ -151,12 +151,12 @@ class RestaurantTracker{
         this.updatingID = id;
     }
     setTotalValue(){
-        this.displayAreas.total.innerText = this.restaurants.length;
+        this.displayAreas.total.innerText = this.destinations.length;
     }
     clearDisplayArea(){
-        while (this.displayAreas.restaurants.firstChild){
-            this.displayAreas.restaurants.removeChild(this.displayAreas.restaurants.firstChild);
+        while (this.displayAreas.destinations.firstChild){
+            this.displayAreas.destinations.removeChild(this.displayAreas.destinations.firstChild);
         }
-        this.restaurants=[];
+        this.destinations=[];
     }
 }

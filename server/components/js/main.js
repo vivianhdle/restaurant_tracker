@@ -1,33 +1,32 @@
 document.addEventListener("DOMContentLoaded",startApp);
 
-let restaurantTracker;
+let destinationTracker;
 
 function startApp(){
-    restaurantTracker = new RestaurantTracker({
+    destinationTracker = new destinationTracker({
         buttons:{
             addButton:document.getElementById('add-button'),
             cancelButton:document.getElementById('cancel-button'),
-            dataButton:document.getElementById('data-button'),
             saveButton:document.getElementById('save-button')
         },
         inputFields:{
-            restaurantName:document.getElementById('restaurant-name'),
-            cuisine:document.getElementById('cuisine'),
-            inOrOut:document.getElementById('in-or-out'),
-            expense:document.getElementById('expense'),
-            partyOf:document.getElementById('party-of'),
+            destinationName:document.getElementById('destination-name'),
+            country:document.getElementById('country'),
+            knownFor:document.getElementById('known-for'),
+            mustEat:document.getElementById('must-eat'),
+            mustDo:document.getElementById('must-do'),
             updateName:document.getElementById('update-name'),
-            updateCuisine:document.getElementById('update-cuisine'),
-            updateInOrOut:document.getElementById('update-in-or-out'),
-            updateExpense:document.getElementById('update-expense'),
-            updatePartyOf:document.getElementById('update-party-of'),
+            updateCountry:document.getElementById('update-country'),
+            updateKnownFor:document.getElementById('update-known-for'),
+            updateMustEat:document.getElementById('update-eat'),
+            updateMustDo:document.getElementById('update-do'),
 
         },
         displayAreas:{
-            restaurants:document.getElementById('display-area'),
+            destinations:document.getElementById('display-area'),
             total:document.getElementById('total')
         }
     })
-    restaurantTracker.addEventListeners();
-    restaurantTracker.getData();
+    destinationTracker.addEventListeners();
+    destinationTracker.getData();
 }
