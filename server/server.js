@@ -12,84 +12,57 @@ server.use(express.urlencoded({extended:false}));
 server.use(express.json())
 
 //=======READ=====================================================
-server.get('/api/destinations',(req,res)=>{
-    db.connect(()=>{
-        const query = `SELECT * from destination`
-        db.query(query,(error,data)=>{
-            const output={
-                success:false
-            }
-            if (!error){
-                output.success=true;
-                output.data = data;
-            } else {
-                output.error = error;
-            }
-            res.send(output);
-        })
+server.get('/api/destinations',(req,res,next)=>{
+    const query = `SELECT * from destination`
+    db.query(query,(error,data)=>{
+        if (error){
+            return next(error);
+        }
+        res.send({success:true,data});
     })
 })
 //=======INSERT=====================================================
-server.post('/api/destinations',(req,res)=>{
+server.post('/api/destinations',(req,res,next)=>{
     const {name,country,knownFor,mustEat,mustDo}=req.body
-    db.connect(()=>{
-        const query = 'INSERT INTO `destination` SET `destination`="'+name+'", `country`="'+country+'", `knownFor` = "'+knownFor+'", `mustEat`="'+mustEat+'", `mustDo` = "'+mustDo+'"'
-        db.query(query,(error,data)=>{
-            const output={
-                success:false,
-                error
-            }
-            if (!error){
-                res.send({success:true})
-            } else {
-                res.send({output});
-            }
-        })
+    const query = 'INSERT INTO `destination` SET `destination`= ?, `country`=? ,`knownFor` = ?, `mustEat`= ? , `mustDo` = ? '
+    db.query(query,[name,country,knownFor,mustEat,mustDo],(error)=>{
+        if (error){
+            return next(error);
+        }
+        res.send({success:true})
     })
 })
 //=======DELETE=====================================================
-server.delete('/api/destinations/:destination_id',(req,res)=>{
-    if(req.params.destination_id === undefined){
-        res.send({
-            success:false,
-            error:'must provide destination ID to delete'
-        })
-        return;
-    }
-    db.connect(()=>{
-        const query = 'DELETE FROM `destination` WHERE `id` = ' + req.params.destination_id;
-        db.query(query,(error,data)=>{
-            const output={
-                success:false
-            }
-            if (!error){
-                output.success=true;
-                output.data = data;
-            } else {
-                output.error = error;
-            }
-            res.send(output);
-        })
+server.delete('/api/destinations/:destination_id',(req,res,next)=>{
+    const query = 'DELETE FROM `destination` WHERE `id` = ' + req.params.destination_id;
+    db.query(query,(error,data)=>{
+        if (error){
+            return next(error);
+        }
+        res.send({success:true,data});
     })
 })
 //=======UPDATE=====================================================
-server.post('/api/update-destination',(req,res)=>{
+server.post('/api/update-destination',(req,res,next)=>{
     const {name,country,knownFor,mustEat,mustDo,id}=req.body
-    db.connect(()=>{
-        const query = 'UPDATE `destination` SET `destination`="'+name+'", `country`="'+country+'", `knownFor` = "'+knownFor+'", `mustEat`="'+mustEat+'", `mustDo` = "'+mustDo+'" WHERE `destination`.`id`=' + id
-        db.query(query,(error,data)=>{
-            const output = {
-                success:false,
-                error
-            }
-            if (!error){
-                res.send({success:true})
-            }else{
-                res.send({output})
-            }
-        })
+    const query = 'UPDATE `destination` SET `destination`= ? , `country`= ?, `knownFor` = ?, `mustEat`=?, `mustDo` = ? WHERE `destination`.`id`= ?'
+    db.query(query,[name,country,knownFor,mustEat,mustDo,id],(error)=>{
+        if (error){
+            return next(error);
+        } else {
+            res.send({success:true})
+        }
     })
 });
+
+server.use((error,req,res,next)=>{
+    const output = {
+        success:false,
+        error:"Internal server error"
+    };
+    console.error(error);
+    res.status(500).send(output);
+})
 
 
 server.listen(3001,()=>{
