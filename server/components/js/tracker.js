@@ -29,10 +29,12 @@ class DestinationTracker{
         this.addDestination = this.addDestination.bind(this);
         this.updateDestination = this.updateDestination.bind(this);
         this.updating = this.updating.bind(this);
+        this.clearInputs = this.clearInputs.bind(this);
     }
     addEventListeners(){
         this.buttons.addButton.addEventListener("click",this.addDestination);
         this.buttons.saveButton.addEventListener("click",this.updateDestination);
+        this.buttons.cancelButton.addEventListener("click",this.clearInputs);
     }
     getData(){
         debugger;
@@ -76,6 +78,13 @@ class DestinationTracker{
             this.setTotalValue();
         })
     }
+    clearInputs(){
+        this.inputFields.destinationName.value = ''
+        this.inputFields.country.value = ''
+        this.inputFields.knownFor.value = ''
+        this.inputFields.mustEat.value = ''
+        this.inputFields.mustDo.value = ''
+    }
     deleteDestination(id){
         fetch(`api/destinations/${id}`, {method: 'DELETE'})
         .then(resp=>resp.json())
@@ -112,6 +121,7 @@ class DestinationTracker{
         .then(data=>{
             if (data.success){
                 this.getData();
+                this.clearInputs();
                 return true;
             } else {
                 return false;
