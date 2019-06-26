@@ -37,7 +37,6 @@ class DestinationTracker{
         this.buttons.cancelButton.addEventListener("click",this.clearInputs);
     }
     getData(){
-        debugger;
         this.clearDisplayArea();
         fetch('api/destinations')
         .then(resp=>resp.json())

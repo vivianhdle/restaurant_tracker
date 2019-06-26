@@ -81,7 +81,6 @@ class Destination{
         return button;
     }
     setDefaultValues(){
-        debugger;
         this.updateFields.updateName.value = this.info.name;
         this.updateFields.updateCountry.value = this.info.country;
         this.updateFields.updateKnownFor.value = this.info.knownFor;
