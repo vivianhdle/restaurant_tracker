@@ -1,7 +1,7 @@
 const express = require('express');
 const mysql = require('mysql');
 const mysqlcredentials = require('./mysqlcreds.js');
-mysqlCredentials.multipleStatements = true;
+mysqlcredentials.multipleStatements = true;
 const cors  = require('cors')
 const cron = require('node-cron');
 const db = mysql.createConnection(mysqlcredentials);
